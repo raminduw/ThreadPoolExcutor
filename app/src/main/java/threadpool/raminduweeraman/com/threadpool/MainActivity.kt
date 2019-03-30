@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
+    lateinit var downloadManager:DownloadManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,12 +20,12 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(TAG,"Click on download")
 
-            val task1 =  DownloadTask("123", getHandler())
-            val task2 =  DownloadTask("456", getHandler())
-            val task3 =  DownloadTask("789", getHandler())
-            val task4 =  DownloadTask("1222", getHandler())
+            val task1 =  DownloadTask("123", getHandler(),10000)
+            val task2 =  DownloadTask("456", getHandler(),20000)
+            val task3 =  DownloadTask("789", getHandler(),30000)
+            val task4 =  DownloadTask("900", getHandler(),40000)
 
-            val downloadManager = DownloadManager()
+            downloadManager = DownloadManager()
             downloadManager.runDownloadFile(task1)
             downloadManager.runDownloadFile(task2)
             downloadManager.runDownloadFile(task3)
@@ -37,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         @SuppressLint("HandlerLeak")
         val  mHandler = object : Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message) {
-                // code here
-                Log.d(TAG,"Message Received")
+                if (msg.what==20) {
+                    Log.d(TAG,"Message Received")
+                    Log.d(TAG,downloadManager.getCompleteCount().toString())
+                }
             }
         }
 

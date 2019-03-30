@@ -24,8 +24,12 @@ class DownloadManager {
 
     public fun runDownloadFile(task:Runnable){
         downloadThreadPool?.execute(task)
+    }
 
-
+    public fun getCompleteCount():StringBuffer{
+        val count =  downloadThreadPool?.taskCount
+        val completeCount = downloadThreadPool?.completedTaskCount
+        return StringBuffer("Complete count : $completeCount/$count")
 
     }
 
