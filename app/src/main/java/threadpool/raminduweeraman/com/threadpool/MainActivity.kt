@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(TAG,"Click on download")
 
-            val task1 =  DownloadTask("123", getHandler(),10000)
-            val task2 =  DownloadTask("456", getHandler(),20000)
-            val task3 =  DownloadTask("789", getHandler(),30000)
-            val task4 =  DownloadTask("900", getHandler(),40000)
+            val task1 =  DownloadTask("123", getHandler(),10000,applicationContext)
+            val task2 =  DownloadTask("456", getHandler(),20000,applicationContext)
+            val task3 =  DownloadTask("789", getHandler(),30000,applicationContext)
+            val task4 =  DownloadTask("900", getHandler(),40000,applicationContext)
 
             downloadManager = DownloadManager()
             downloadManager.runDownloadFile(task1)
